@@ -120,14 +120,19 @@ class DriversTablePage extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         child: DataTable(
           columns: const [
-            DataColumn(label: Text('عرض السجل')),
             DataColumn(label: Text('المسلسل')),
             DataColumn(label: Text('كود السائق')),
             DataColumn(label: Text('      اسم السائق')),
             DataColumn(label: Text('عدد مرات العمل')),
+            DataColumn(label: Text('عرض السجل')),
           ],
           rows: List.generate(drivercode.length - 1, (index) {
             return DataRow(cells: [
+              DataCell(Text((index + 1).toString())),
+              DataCell(Text(drivercode[index])),
+
+              DataCell(Text(nameOnly[index] ?? '--')),
+              DataCell(Center(child: Text(driverCodeCount[index].toString()))),
               DataCell(IconButton(
                 icon: Icon(Icons.start),
                 onPressed: () {
@@ -143,12 +148,6 @@ class DriversTablePage extends StatelessWidget {
                   }));
                 },
               )),
-
-              DataCell(Text((index + 1).toString())),
-              DataCell(Text(drivercode[index])),
-
-              DataCell(Text(nameOnly[index] ?? '--')),
-              DataCell(Center(child: Text(driverCodeCount[index].toString()))),
 
               // عدد مرات العمل
             ]);

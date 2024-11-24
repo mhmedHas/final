@@ -439,8 +439,8 @@ class _DriverDataScreenState extends State<DriverDataScreen> {
     );
 
     final output = await getTemporaryDirectory();
-    // final filePath = "${output.path}\\${widget.name}.pdf";  //for win
-    final filePath = "${output.path}/${widget.name}.pdf"; //for android
+    final filePath = "${output.path}\\${widget.name}.pdf"; //for win
+    // final filePath = "${output.path}/${widget.name}.pdf"; //for android
     final file = File(filePath);
     await file.writeAsBytes(await pdf.save());
 
@@ -576,6 +576,10 @@ class _DriverDataScreenState extends State<DriverDataScreen> {
             Padding(
               padding: EdgeInsets.all(16.0),
               child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.black,
+                  backgroundColor: Colors.black, // اللون النص عند الضغط
+                ),
                 onPressed: () {
                   generateAndSharePDF();
                 },
