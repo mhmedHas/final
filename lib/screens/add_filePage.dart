@@ -96,9 +96,12 @@ class _FileUploadPageState extends State<FileUploadPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('تحميل الملف وإدخال نسبة الربح'),
+        title: Text(
+          'تحميل الملف وإدخال نسبة الربح',
+          style: TextStyle(color: Colors.white),
+        ),
         centerTitle: true,
-        backgroundColor: Colors.amber,
+        backgroundColor: Colors.black,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -111,16 +114,16 @@ class _FileUploadPageState extends State<FileUploadPage> {
               child: Container(
                 height: 100,
                 decoration: BoxDecoration(
-                  color: Colors.amber,
+                  color: Colors.black,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Center(
                   child: Text(
-                    excelFile == null
-                        ? 'اضغط هنا لتحميل الملف (Excel أو XML)'
-                        : 'تم تحميل الملف: ${excelFile!.path.split('/').last}',
-                    textAlign: TextAlign.center,
-                  ),
+                      excelFile == null
+                          ? 'اضغط هنا لتحميل الملف (Excel )'
+                          : 'تم تحميل الملف: ${excelFile!.path.split('/').last}',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.white)),
                 ),
               ),
             ),

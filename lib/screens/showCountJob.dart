@@ -111,26 +111,23 @@ class DriversTablePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('جدول السائقين وعدد مرات العمل'),
+        title: Text('جدول السائقين وعدد مرات العمل',
+            style: TextStyle(color: Colors.white)),
         centerTitle: true,
-        backgroundColor: Colors.amber,
+        backgroundColor: Colors.black,
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: DataTable(
           columns: const [
-            DataColumn(label: Text('عدد مرات العمل')),
-            DataColumn(label: Text('اسم السائق')),
-            DataColumn(label: Text('كود السائق')),
-            DataColumn(label: Text('المسلسل')),
             DataColumn(label: Text('عرض السجل')),
+            DataColumn(label: Text('المسلسل')),
+            DataColumn(label: Text('كود السائق')),
+            DataColumn(label: Text('      اسم السائق')),
+            DataColumn(label: Text('عدد مرات العمل')),
           ],
           rows: List.generate(drivercode.length - 1, (index) {
             return DataRow(cells: [
-              DataCell(Text(driverCodeCount[index].toString())),
-              DataCell(Text(nameOnly[index] ?? '--')),
-              DataCell(Text(drivercode[index])),
-              DataCell(Text((index + 1).toString())),
               DataCell(IconButton(
                 icon: Icon(Icons.start),
                 onPressed: () {
@@ -145,7 +142,15 @@ class DriversTablePage extends StatelessWidget {
                     );
                   }));
                 },
-              )), // عدد مرات العمل
+              )),
+
+              DataCell(Text((index + 1).toString())),
+              DataCell(Text(drivercode[index])),
+
+              DataCell(Text(nameOnly[index] ?? '--')),
+              DataCell(Center(child: Text(driverCodeCount[index].toString()))),
+
+              // عدد مرات العمل
             ]);
           }),
         ),

@@ -156,7 +156,7 @@ class _DriverDataScreenState extends State<DriverDataScreen> {
     // إنشاء محتوى PDF
 
     final amiri = pw.Font.ttf(
-        await rootBundle.load('lib/assets/fonts/Amiri/Amiri-Regular.ttf'));
+        await rootBundle.load('assets/fonts/Amiri/Amiri-Regular.ttf'));
     pdf.addPage(
       pw.MultiPage(
         pageFormat: PdfPageFormat.a4,
@@ -419,7 +419,7 @@ class _DriverDataScreenState extends State<DriverDataScreen> {
                     ),
                     textDirection: pw.TextDirection.rtl),
               ),
-            ],
+            ], //
             data: [
               [
                 grandTotal.toStringAsFixed(2),
@@ -439,14 +439,13 @@ class _DriverDataScreenState extends State<DriverDataScreen> {
     );
 
     final output = await getTemporaryDirectory();
-    // final filePath = "${output.path}\\driver_data.pdf";  //for win
-    final filePath = "${output.path}/driver_data.pdf"; //for android
+    // final filePath = "${output.path}\\${widget.name}.pdf";  //for win
+    final filePath = "${output.path}/${widget.name}.pdf"; //for android
     final file = File(filePath);
     await file.writeAsBytes(await pdf.save());
 
     await Share.shareXFiles(
       [XFile(filePath)],
-      text: 'xxxxx',
     );
   }
 
@@ -472,10 +471,12 @@ class _DriverDataScreenState extends State<DriverDataScreen> {
         driverRecords.fold(0, (sum, record) => sum + (record['total'] ?? 0));
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text('بيانات السائق ${widget.name}'),
+        title: Text('بيانات السائق ${widget.name}',
+            style: TextStyle(color: Colors.white)),
         centerTitle: true,
-        backgroundColor: Colors.amber,
+        backgroundColor: Colors.black,
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
@@ -540,8 +541,8 @@ class _DriverDataScreenState extends State<DriverDataScreen> {
                 child: Text(
               "الاجماليات",
               style: TextStyle(
-                  color: Colors.black,
-                  backgroundColor: Colors.amber,
+                  color: Colors.white,
+                  backgroundColor: Colors.black,
                   fontSize: 30,
                   fontWeight: FontWeight.bold),
             )),
@@ -573,12 +574,13 @@ class _DriverDataScreenState extends State<DriverDataScreen> {
 
             // زر مشاركة PDF
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: EdgeInsets.all(16.0),
               child: ElevatedButton(
                 onPressed: () {
                   generateAndSharePDF();
                 },
-                child: Text('مشاركة كـ PDF'),
+                child: const Text('مشاركة كـ PDF',
+                    style: TextStyle(color: Colors.white)),
               ),
             ),
           ],
